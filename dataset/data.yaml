@@ -1,0 +1,17 @@
+# =============================================================
+# data.yaml - Configuración de dataset para entrenamiento YOLO
+# Modificar con las clases propias al tener imágenes etiquetadas.
+# =============================================================
+
+# Rutas (relativas a este archivo)
+train: images/train
+val: images/val
+
+# Número de clases
+nc: 3
+
+# Nombres de las clases (ejemplo - cambiar por tus clases reales)
+names:
+  0: shampoo
+  1: lata_atun
+  2: caja_medicina

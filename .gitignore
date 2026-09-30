@@ -1,0 +1,53 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# === Entorno virtual ===
+.venv/
+venv/
+env/
+ENV/
+
+# === Variables de entorno (SECRETOS) ===
+.env
+.env.local
+.env.production
+
+# === Base de datos local ===
+data/eyes_local.db
+
+# === Logs ===
+logs/
+
+# === Modelos descargados (pesados) ===
+modelos/vosk-model-*/
+modelos/*.pt
+modelos/*.onnx
+
+# === Dataset de imágenes (pesado) ===
+dataset/images/
+dataset/labels/
+
+# === YOLO runs ===
+runs/
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# === Windows ===
+Thumbs.db
+Desktop.ini
+
+# === macOS ===
+.DS_Store
+yolov8n.pt

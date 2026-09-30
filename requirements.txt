@@ -1,0 +1,35 @@
+# EYES - Requisitos de Python 3.11
+# Instalar con: pip install -r requirements.txt
+
+# --- Visión por computadora ---
+opencv-python==4.10.0.84
+ultralytics==8.2.103
+
+# --- OCR ---
+easyocr==1.7.2
+
+# --- PyTorch (CPU, Windows) ---
+torch==2.3.1
+torchvision==0.18.1
+
+# --- Reconocimiento de voz (local, sin internet) ---
+vosk==0.3.45
+sounddevice==0.5.1
+
+# --- Síntesis de voz ---
+pyttsx3==2.98
+
+# --- Base de datos ---
+PyMySQL==1.1.1
+cryptography==43.0.3
+
+# --- Configuración ---
+python-dotenv==1.0.1
+
+# --- IA en la nube (Gemini) ---
+google-genai==1.14.0
+
+# --- Utilidades ---
+numpy==1.26.4
+Pillow==10.4.0
+requests==2.32.3
