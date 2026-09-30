@@ -76,12 +76,6 @@ MYSQL_USER = os.getenv("MYSQL_USER", "")
 MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD", "")
 MYSQL_DATABASE = os.getenv("MYSQL_DATABASE", "EYES")
 
-# Gemini
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
-GEMINI_MODELO = "gemini-3.5-flash-lite"
-GEMINI_TIMEOUT = 8
-GEMINI_MAX_TOKENS = 200
-
 # Sincronizacion
 SYNC_INTERVALO_SEGUNDOS = 30
 SYNC_LOTE_MAXIMO = 50
