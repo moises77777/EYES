@@ -1,133 +1,94 @@
-"""
-config.py - Configuración central de EYES.
-Todos los parámetros ajustables están aquí.
-"""
+# config.py - Configuracion de EYES
 
 import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Cargar variables de entorno desde .env
 load_dotenv(Path(__file__).parent / ".env")
 
-# =============================================================
-# RUTAS BASE
-# =============================================================
+# Rutas
 BASE_DIR = Path(__file__).parent
 MODELOS_DIR = BASE_DIR / "modelos"
 DATA_DIR = BASE_DIR / "data"
 LOGS_DIR = BASE_DIR / "logs"
 DATASET_DIR = BASE_DIR / "dataset"
 
-# Crear directorios si no existen
 for d in [MODELOS_DIR, DATA_DIR, LOGS_DIR, DATASET_DIR]:
     d.mkdir(parents=True, exist_ok=True)
 
-# =============================================================
-# CÁMARA
-# =============================================================
-CAMARA_INDICE = 0                # Índice de la cámara (0 = predeterminada)
-CAMARA_ANCHO = 640               # Ancho del frame
-CAMARA_ALTO = 480                # Alto del frame
-CAMARA_FPS = 30                  # FPS objetivo
+# Camara
+CAMARA_INDICE = 0
+CAMARA_ANCHO = 640
+CAMARA_ALTO = 480
+CAMARA_FPS = 30
 
-# =============================================================
-# VOZ DE SALIDA (pyttsx3)
-# =============================================================
-VOZ_VELOCIDAD = 175              # Palabras por minuto (ajustable por el usuario)
-VOZ_VOLUMEN = 1.0                # Volumen de 0.0 a 1.0
-VOZ_VELOCIDAD_MIN = 100          # Mínimo permitido
-VOZ_VELOCIDAD_MAX = 300          # Máximo permitido
-VOZ_AJUSTE_PASO = 25             # Cuánto sube/baja al decir "más rápido" / "más lento"
+# Voz salida
+VOZ_VELOCIDAD = 175
+VOZ_VOLUMEN = 1.0
+VOZ_VELOCIDAD_MIN = 100
+VOZ_VELOCIDAD_MAX = 300
+VOZ_AJUSTE_PASO = 25
 
-# =============================================================
-# VOZ DE ENTRADA (Vosk)
-# =============================================================
+# Voz entrada (Vosk)
 VOSK_MODELO_RUTA = str(MODELOS_DIR / "vosk-model-small-es-0.42")
-VOSK_FRECUENCIA_MUESTREO = 16000  # Hz
-VOSK_BLOQUE_TAMANO = 8000         # Muestras por bloque
+VOSK_FRECUENCIA_MUESTREO = 16000
+VOSK_BLOQUE_TAMANO = 8000
 
-# =============================================================
-# DETECCIÓN DE OBJETOS (YOLO)
-# =============================================================
-YOLO_MODELO_RUTA = str(MODELOS_DIR / "yolov8n.pt")  # Modelo preentrenado COCO
-YOLO_MODELO_PROPIO_RUTA = str(MODELOS_DIR / "mejor_modelo.pt")  # Modelo entrenado propio
-YOLO_USAR_MODELO_PROPIO = False   # Cambiar a True al tener modelo entrenado
-YOLO_CONFIANZA_MINIMA = 0.6       # Umbral de confianza
-YOLO_DISPOSITIVO = "cpu"          # "cpu" o "cuda" si hay GPU NVIDIA
+# YOLO
+YOLO_MODELO_RUTA = str(MODELOS_DIR / "yolov8n.pt")
+YOLO_MODELO_PROPIO_RUTA = str(MODELOS_DIR / "mejor_modelo.pt")
+YOLO_USAR_MODELO_PROPIO = False
+YOLO_CONFIANZA_MINIMA = 0.6
+YOLO_DISPOSITIVO = "cpu"
 
-# =============================================================
-# OCR (EasyOCR)
-# =============================================================
-OCR_IDIOMAS = ["es", "en"]        # Idiomas para lectura
-OCR_CONFIANZA_MINIMA = 0.3        # Umbral mínimo de confianza por línea
-OCR_GPU = False                   # True si hay GPU NVIDIA
+# OCR
+OCR_IDIOMAS = ["es", "en"]
+OCR_CONFIANZA_MINIMA = 0.3
+OCR_GPU = False
 
-# =============================================================
-# TEXTO LARGO (para ofrecer resumen)
-# =============================================================
-TEXTO_LARGO_PALABRAS = 40         # Más de N palabras = ofrecer resumen
+# Texto largo
+TEXTO_LARGO_PALABRAS = 40
 
-# =============================================================
-# GUÍA POR SONIDO
-# =============================================================
-SONIDO_FRECUENCIA_LEJOS = 800     # Hz del pitido cuando está lejos
-SONIDO_FRECUENCIA_CERCA = 1200    # Hz del pitido cuando está cerca
-SONIDO_FRECUENCIA_LISTO = 1800    # Hz del tono de "listo"
-SONIDO_DURACION = 0.08            # Duración del pitido en segundos
-SONIDO_VOLUMEN = 0.5              # Volumen de los pitidos (0.0 a 1.0)
+# Guia por sonido
+SONIDO_FRECUENCIA_LEJOS = 800
+SONIDO_FRECUENCIA_CERCA = 1200
+SONIDO_FRECUENCIA_LISTO = 1800
+SONIDO_DURACION = 0.08
+SONIDO_VOLUMEN = 0.5
 
-# =============================================================
-# MODO BUSCAR
-# =============================================================
-BUSCAR_TIEMPO_LIMITE = 30         # Segundos antes de preguntar si sigue buscando
+# Modo buscar
+BUSCAR_TIEMPO_LIMITE = 30
 
-# =============================================================
-# ESTABILIDAD DE DETECCIÓN
-# =============================================================
-ESTABILIDAD_FRAMES = 5            # Frames consecutivos para confirmar detección
-ESTABILIDAD_REPETIR_SEGUNDOS = 5  # No repetir el mismo objeto antes de N segundos
+# Estabilidad de deteccion
+ESTABILIDAD_FRAMES = 5
+ESTABILIDAD_REPETIR_SEGUNDOS = 5
 
-# =============================================================
-# NITIDEZ (Laplaciano para verificar enfoque)
-# =============================================================
-NITIDEZ_UMBRAL = 50.0             # Varianza del Laplaciano mínima para considerar nítido
+# Nitidez
+NITIDEZ_UMBRAL = 50.0
 
-# =============================================================
-# BASE DE DATOS - SQLite LOCAL
-# =============================================================
+# SQLite
 SQLITE_RUTA = str(DATA_DIR / "eyes_local.db")
 
-# =============================================================
-# BASE DE DATOS - MySQL EN LA NUBE
-# =============================================================
+# MySQL
 MYSQL_HOST = os.getenv("MYSQL_HOST", "")
 MYSQL_PORT = int(os.getenv("MYSQL_PORT", "3306"))
 MYSQL_USER = os.getenv("MYSQL_USER", "")
 MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD", "")
-MYSQL_DATABASE = os.getenv("MYSQL_DATABASE", "eyes_db")
+MYSQL_DATABASE = os.getenv("MYSQL_DATABASE", "EYES")
 
-# =============================================================
-# IA EN LA NUBE (Gemini)
-# =============================================================
+# Gemini
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
-GEMINI_MODELO = "gemini-3.5-flash-lite"  # Modelo de Gemini a usar
-GEMINI_TIMEOUT = 8                       # Segundos máximos de espera
-GEMINI_MAX_TOKENS = 200                  # Máximo de tokens en respuesta
+GEMINI_MODELO = "gemini-3.5-flash-lite"
+GEMINI_TIMEOUT = 8
+GEMINI_MAX_TOKENS = 200
 
-# =============================================================
-# SINCRONIZACIÓN
-# =============================================================
-SYNC_INTERVALO_SEGUNDOS = 30      # Cada cuántos segundos intentar sincronizar
-SYNC_LOTE_MAXIMO = 50             # Máximo de registros por lote de sincronización
+# Sincronizacion
+SYNC_INTERVALO_SEGUNDOS = 30
+SYNC_LOTE_MAXIMO = 50
 
-# =============================================================
-# ADMINISTRADOR
-# =============================================================
+# Admin
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
 
-# =============================================================
-# LOGGING
-# =============================================================
+# Logging
 LOG_ARCHIVO = str(LOGS_DIR / "eyes.log")
-LOG_NIVEL = "DEBUG"               # DEBUG, INFO, WARNING, ERROR, CRITICAL
+LOG_NIVEL = "DEBUG"

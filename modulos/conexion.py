@@ -1,6 +1,4 @@
-"""
-conexion.py - Verificación de conexión a internet.
-"""
+# conexion.py - Verificar conexion a internet
 
 import logging
 import socket
@@ -8,11 +6,7 @@ import socket
 logger = logging.getLogger("eyes")
 
 
-def hay_internet(host: str = "8.8.8.8", puerto: int = 53, timeout: float = 3.0) -> bool:
-    """
-    Verifica si hay conexión a internet intentando conectar a DNS de Google.
-    Retorna True si hay conexión, False si no.
-    """
+def hay_internet(host="8.8.8.8", puerto=53, timeout=3.0):
     try:
         socket.setdefaulttimeout(timeout)
         conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
