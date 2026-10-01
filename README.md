@@ -233,4 +233,74 @@ Hilo sincronizacion
 
 ---
 
+## Tablas de la base de datos (MySQL / XAMPP)
+
+5 tablas en la base de datos `EYES`:
+
+### usuario
+| Campo | Tipo | Descripcion |
+|-------|------|-------------|
+| id | INT AUTO_INCREMENT | Llave primaria |
+| nombre | VARCHAR(100) | Nombre del usuario (se pide por voz) |
+| velocidad_voz | INT (default 175) | Velocidad de pyttsx3 |
+| volumen | FLOAT (default 1.0) | Volumen de la voz |
+| fecha_registro | DATETIME | Cuando se registro |
+| primer_uso_completado | TINYINT | 1 si ya paso el tutorial |
+| id_dispositivo | VARCHAR(100) | Identificador de la PC (opcional) |
+
+### objetos_catalogo
+| Campo | Tipo | Descripcion |
+|-------|------|-------------|
+| id | INT AUTO_INCREMENT | Llave primaria |
+| clase_modelo | VARCHAR(80) UNIQUE | Nombre en YOLO (ej: "bottle") |
+| nombre_es | VARCHAR(100) | Nombre en espanol (ej: "botella") |
+| sinonimos | TEXT | Sinonimos separados por coma |
+| categoria | VARCHAR(30) | alimento, higiene, otro |
+| advertencia | TEXT | Texto de advertencia (ej: "objeto cortante") |
+| activo | TINYINT | 1 si esta activo |
+
+### objetos_personales
+| Campo | Tipo | Descripcion |
+|-------|------|-------------|
+| id | INT AUTO_INCREMENT | Llave primaria |
+| id_usuario | INT | FK a usuario(id) |
+| nombre_personal | VARCHAR(200) | Nombre que le puso el usuario |
+| descripcion | TEXT | Descripcion opcional |
+| clase_modelo | VARCHAR(80) | Clase YOLO asociada |
+| categoria | VARCHAR(30) | Categoria del objeto |
+| fecha_registro | DATETIME | Cuando se guardo |
+| sincronizado | TINYINT | 0=pendiente, 1=sincronizado |
+
+### historial
+| Campo | Tipo | Descripcion |
+|-------|------|-------------|
+| id | INT AUTO_INCREMENT | Llave primaria |
+| id_usuario | INT | FK a usuario(id) |
+| fecha_hora | DATETIME | Cuando se identifico |
+| modo | VARCHAR(30) | "identificar" |
+| resultado | TEXT | Que detecto (ej: "botella") |
+| confianza | FLOAT | % de confianza de YOLO |
+| uso_ia_nube | TINYINT | Si uso IA en la nube |
+| sincronizado | TINYINT | 0=pendiente, 1=sincronizado |
+
+### configuracion
+| Campo | Tipo | Descripcion |
+|-------|------|-------------|
+| id_usuario | INT | FK a usuario(id) |
+| clave | VARCHAR(80) | Nombre del ajuste (ej: "velocidad_voz") |
+| valor | TEXT | Valor del ajuste (ej: "175") |
+| sincronizado | TINYINT | 0=pendiente, 1=sincronizado |
+| | | Llave primaria: (id_usuario, clave) |
+
+### Relaciones
+
+```
+usuario (1) --- (N) objetos_personales
+usuario (1) --- (N) historial
+usuario (1) --- (N) configuracion
+objetos_catalogo (independiente, 46 objetos precargados)
+```
+
+---
+
 Proyecto escolar - Prototipo 2026.
